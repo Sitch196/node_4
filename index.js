@@ -15,7 +15,7 @@ app.post("/turtle", async ({ body }, res) => {
 });
 
 sequelize
-  .sync()
+  .sync({ alter: true })
   .then(() => {
     console.log("Connected to Postgres Successfully");
     app.listen(3000, () => {

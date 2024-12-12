@@ -15,6 +15,28 @@ module.exports = (Sequelize) => {
   const weapon = require("../models/weapon.js")(Sequelize, sequelize);
   const pizza = require("../models/pizza.js")(Sequelize, sequelize);
 
+  turtle.belongsTo(weapon, {
+    foreignKey: "weaponId",
+    as: "weapon",
+  });
+
+  weapon.hasOne(turtle, {
+    foreignKey: "weaponId",
+    as: "turtle",
+  });
+
+  turtle.belongsTo(pizza, {
+    foreignKey: "firstFavoritePizzaId",
+    as: "firstFavoritePizza",
+  });
+
+  turtle.belongsTo(pizza, {
+    foreignKey: "secondFavoritePizzaId",
+    as: "secondFavoritePizza",
+  });
+
+  // sequelize.sync({ alter: true });
+
   return {
     sequelize,
     turtle,
