@@ -35,8 +35,6 @@ module.exports = (Sequelize) => {
     as: "secondFavoritePizza",
   });
 
-  // sequelize.sync({ alter: true });
-
   return {
     sequelize,
     turtle,

@@ -1,18 +1,19 @@
 const Sequelize = require("sequelize");
-const { sequelize, turtle } = require("./context/index")(Sequelize);
+const { sequelize } = require("./context/index")(Sequelize);
+const {
+  createTurtle,
+  getAllTurtles,
+  getTurtlesByFavoritePizza,
+} = require("./controllers/turtleControllers");
+
 const express = require("express");
 const app = express();
 
 app.use(express.json());
 
-app.post("/turtle", async ({ body }, res) => {
-  try {
-    const newTurtle = await turtle.create(body);
-    res.json(newTurtle);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+app.get("/turtles", getAllTurtles);
+app.post("/turtles", createTurtle);
+app.get("/turtles/favorite-pizza", getTurtlesByFavoritePizza);
 
 sequelize
   .sync({ alter: true })
