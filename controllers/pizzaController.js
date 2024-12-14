@@ -37,6 +37,7 @@ const updateHighCaloriePizzas = async (req, res) => {
         },
       }
     );
+
     const updatedPizzas = await pizza.findAll({
       where: {
         calories: {

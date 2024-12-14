@@ -1,5 +1,4 @@
-const { Sequelize } = require("sequelize");
-
+const { Sequelize, Op } = require("sequelize");
 const { turtle, pizza } = require("../context/index")(Sequelize);
 
 const createTurtle = async ({ body }, res) => {

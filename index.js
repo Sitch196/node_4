@@ -1,5 +1,7 @@
+require("dotenv").config();
 const Sequelize = require("sequelize");
 const { sequelize } = require("./context/index")(Sequelize);
+
 const {
   createTurtle,
   getAllTurtles,
@@ -17,7 +19,6 @@ const { getWeaponsWithHighDPS } = require("./controllers/weaponController");
 
 const express = require("express");
 const app = express();
-
 app.use(express.json());
 
 app.get("/turtles", getAllTurtles);
@@ -32,9 +33,9 @@ app.get("/weapons/high-damage", getWeaponsWithHighDPS);
 sequelize
   .sync({ alter: true })
   .then(() => {
-    console.log("Connected to Postgres Successfully");
-    app.listen(3000, () => {
-      console.log("App Running on port 3000");
+    console.log("Connected to Database Successfully");
+    app.listen(process.env.PORT, () => {
+      console.log(`App Running on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {
